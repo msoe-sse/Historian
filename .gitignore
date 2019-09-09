@@ -1,2 +1,2 @@
-secrets.bat
+.env
 **/node_modules/**
