@@ -9,11 +9,18 @@ const app = new App({
   signingSecret: process.env.SLACK_SIGNING_SECRET
 });
 
-// The echo command simply echoes on command
-app.command("/bonk", async ({ command, ack, say }) => {
+// // The echo command simply echoes on command
+// app.command("/bonk", async ({ command, ack, say }) => {
+//   // Acknowledge command request
+//   ack();
+//   console.log(`${command.text}`);
+//   say(`${command.text}`);
+// });
+
+app.command("/echo", async ({ command, ack, say }) => {
   // Acknowledge command request
   ack();
-  console.log(`${command.text}`);
+
   say(`${command.text}`);
 });
 
