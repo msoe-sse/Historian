@@ -17,9 +17,11 @@ const app = new App({
 //   say(`${command.text}`);
 // });
 
-app.message("bonk", ({ message, say }) => {
-  // say() sends a message to the channel where the event was triggered
-  say(`Bonk :bonk: <@${message.user}>\!`);
+app.command("/bonk", async ({ command, ack, say }) => {
+  // Acknowledge command request
+  ack();
+
+  say(`Bonk :bonk:`);
 });
 
 (async () => {
