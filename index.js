@@ -21,6 +21,7 @@ app.command("/bonk", async ({ command, ack, say }) => {
   // Acknowledge command request
   ack();
 
+  console.log("bonk");
   say(`Bonk :bonk:`);
 });
 
