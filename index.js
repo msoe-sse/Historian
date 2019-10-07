@@ -17,7 +17,7 @@ const app = new App({
 //   say(`${command.text}`);
 // });
 
-app.command("bonk", async ({ command, ack, say }) => {
+app.command("/bonk", async ({ command, ack, say }) => {
   // Acknowledge command request
   ack();
 
