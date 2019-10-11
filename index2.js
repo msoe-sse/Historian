@@ -14,12 +14,12 @@ const controller = new Botkit({
 });
 
 controller.on('slash_command', function(bot, message) {
-    bot.replyAcknowledge();
     switch(message.command) {
         case '/bonk':
             bot.reply(message, "bonk");
             break;
         default:
             bot.reply(message, 'unknown command');
+            break;
     };
 });
