@@ -2,9 +2,9 @@
   "name": "historian",
   "version": "1.0.0",
   "description": "Historian slack app",
-  "main": "index2.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node index2.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/msoe-sse/Historian#readme",
   "dependencies": {
-    "@slack/bolt": "^1.2.0",
     "botbuilder-adapter-slack": "^1.0.4",
     "botkit": "^4.5.0",
     "dotenv": "^8.1.0"

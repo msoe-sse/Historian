@@ -1,33 +1,25 @@
-const { App } = require("@slack/bolt");
-require("dotenv").config();
+const { Botkit } = require('botkit');
+require('dotenv').config();
+const { SlackAdapter } = require('botbuilder-adapter-slack');
 
-console.log(process.env.SLACK_SIGNING_SECRET);
-
-// Initializes your app with your bot token and signing secret
-const app = new App({
-  token: process.env.SLACK_BOT_TOKEN,
-  signingSecret: process.env.SLACK_SIGNING_SECRET
+const adapter = new SlackAdapter({
+    clientId: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    clientSigningSecret: process.env.CLIENT_SIGNING_SECRET,
+    botToken: process.env.BOT_TOKEN
 });
 
-// // The echo command simply echoes on command
-// app.command("/bonk", async ({ command, ack, say }) => {
-//   // Acknowledge command request
-//   ack();
-//   console.log(`${command.text}`);
-//   say(`${command.text}`);
-// });
-
-app.command("/bonk", async ({ command, ack, say }) => {
-  // Acknowledge command request
-  ack();
-
-  console.log("bonk");
-  say(`Bonk :bonk:`);
+const controller = new Botkit({
+    adapter: adapter
 });
 
-(async () => {
-  // Start your app
-  await app.start(process.env.PORT || 3000);
-
-  console.log("⚡️ Bolt app is running!");
-})();
+controller.on('slash_command', function(bot, message) {
+    switch(message.command) {
+        case '/bonk':
+            bot.reply(message, "bonk");
+            break;
+        default:
+            bot.reply(message, 'unknown command');
+            break;
+    };
+});
