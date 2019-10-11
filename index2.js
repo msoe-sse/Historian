@@ -8,7 +8,7 @@ const adapter = new SlackAdapter({
 });
 
 const controller = new Botkit({
-    adapter
+    adapter: adapter
 });
 
 controller.on('slash_command', function(bot, message) {
