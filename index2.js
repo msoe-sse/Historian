@@ -7,7 +7,7 @@ const adapter = new SlackAdapter({
     botToken: process.env.BOT_TOKEN
 });
 
-const controller = Botkit({
+const controller = new Botkit({
     adapter
 });
 
