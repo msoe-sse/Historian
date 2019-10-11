@@ -13,15 +13,6 @@ const controller = new Botkit({
     adapter: adapter
 });
 
-controller.setupWebserver(process.env.PORT || 3000, function (err, webserver) {
-    if (err) process.exit(1);
-
-    webserver.use(function (req, res, next) {
-        next();
-    });
-    controller.createWebhookEndpoints(webserver);
-});
-
 controller.on('slash_command', function(bot, message) {
     bot.replyAcknowledge();
     switch(message.command) {
