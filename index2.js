@@ -1,4 +1,4 @@
-const Botkit = require('botkit');
+const { Botkit } = require('botkit');
 require('dotenv').config();
 const { SlackAdapter } = require('botbuilder-adapter-slack');
 
