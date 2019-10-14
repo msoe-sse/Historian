@@ -13,10 +13,11 @@ const controller = new Botkit({
     adapter: adapter
 });
 
-controller.on('slash_command', function(bot, message) {
+controller.on('slash_command', async function(bot, message) {
     switch(message.command) {
         case '/bonk':
-            console.log(bot.api.channels.history());
+            const channelHistory = await bot.api.channels.history();
+            console.log(channelHistory);
             bot.reply(message, "bonk");
             break;
         case '/archive_message':
