@@ -16,7 +16,11 @@ const controller = new Botkit({
 controller.on('slash_command', function(bot, message) {
     switch(message.command) {
         case '/bonk':
+            console.log(bot);
+            console.log(message);
             bot.reply(message, "bonk");
+            break;
+        case '/archive_message':
             break;
         default:
             bot.reply(message, 'unknown command');
