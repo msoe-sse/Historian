@@ -16,7 +16,7 @@ const controller = new Botkit({
 controller.on('slash_command', async function(bot, message) {
     switch(message.command) {
         case '/bonk':
-            const channelHistory = await bot.api.channels.history();
+            const channelHistory = await bot.api.channels.history({token: bot.config.bot.app_token});
             console.log(channelHistory);
             bot.reply(message, "bonk");
             break;
