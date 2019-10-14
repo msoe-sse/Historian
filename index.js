@@ -16,7 +16,7 @@ const controller = new Botkit({
 controller.on('slash_command', function(bot, message) {
     switch(message.command) {
         case '/bonk':
-            console.log(bot.api.channels.history);
+            console.log(bot.api.channels.history());
             bot.reply(message, "bonk");
             break;
         case '/archive_message':
