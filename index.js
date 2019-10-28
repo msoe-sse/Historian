@@ -13,7 +13,7 @@ const controller = new Botkit({
     adapter: adapter
 });
 
-controller.on('slash_command', async function(bot, message) {
+controller.on('slash_command', function(bot, message) {
     switch(message.command) {
         case '/bonk':
             console.log(bot.config);
