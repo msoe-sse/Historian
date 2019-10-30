@@ -1,4 +1,4 @@
-const config = require('../config/config.js');
+require('../config/config.js');
 
 function createSSEResource(author, contents) {
     return new Promise(function(resolve, reject) {
@@ -29,3 +29,5 @@ function createSSEResource(author, contents) {
         });
     });
 }
+
+exports.createSSEResource = createSSEResource;

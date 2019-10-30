@@ -1,7 +1,8 @@
 const { Botkit } = require('botkit');
 require('dotenv').config();
 const { SlackAdapter } = require('botbuilder-adapter-slack');
-const config = require('../config/config.js');
+require('../config/config.js');
+const sseWebApiClient = require('./sse-web-api-client.js');
 
 const adapter = new SlackAdapter({
     clientId: process.env.CLIENT_ID,
@@ -14,19 +15,28 @@ const controller = new Botkit({
     adapter: adapter
 });
 
-controller.on('slash_command', function(bot, message) {
+controller.on('slash_command', async function(bot, message) {
     switch(message.command) {
         case '/bonk':
-            console.log(bot);
-            // const channelHistory = await bot.api.channels.history({token: bot.config.bot.app_token});
-            // console.log(channelHistory);
+            bot.reply(message, 'bonk')
+            break;
+        case '/archive_message':
             if(global.gConfig.validChannels.includes(message.incoming_message.channelData.channel_name)) {
-                bot.reply(message, "bonk");
+                const channelHistory = await bot.api.channels.history({token: process.env.SLACK_API_TOKEN, 
+                                                channel: message.incoming_message.channelData.channel_id});
+                const newestMessage = channelHistory.messages.find(x => x.subtype === undefined);
+
+                const userInfo = await bot.api.users.info({
+                    token: process.env.SLACK_API_TOKEN,
+                    user: newestMessage.user
+                });
+
+                const apiResponse = await sseWebApiClient.createSSEResource(userInfo.name, newestMessage.text);
+
+                bot.reply(message, apiResponse);
             } else {
                 bot.reply(message, `Error: the historian cannot archive messages in the channel ${message.incoming_message.channelData.channel_name}`);
             }
-            break;
-        case '/archive_message':
             break;
         default:
             bot.reply(message, 'unknown command');
