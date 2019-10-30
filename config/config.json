@@ -1,14 +1,17 @@
 {
     "development": {
         "config_id": "development",
-        "apiBaseUrl": "http://localhost:5000"
+        "apiBaseUrl": "http://localhost:5000",
+        "validChannels": [ "general" ]
     },
     "staging": {
         "config_id": "staging",
-        "apiBaseUrl": "https://sse-web-api-staging.herokuapp.com/"
+        "apiBaseUrl": "https://sse-web-api-staging.herokuapp.com/",
+        "validChannels": [ "general" ]
     },
     "production": {
         "config_id": "production",
-        "apiBaseUrl": "https://sse-web-api-prod.herokuapp.com"
+        "apiBaseUrl": "https://sse-web-api-prod.herokuapp.com",
+        "validChannels": ["articles"]
     }
 }

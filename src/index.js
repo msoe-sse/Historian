@@ -1,6 +1,7 @@
 const { Botkit } = require('botkit');
 require('dotenv').config();
 const { SlackAdapter } = require('botbuilder-adapter-slack');
+const config = require('../config/config.js');
 
 const adapter = new SlackAdapter({
     clientId: process.env.CLIENT_ID,
@@ -16,10 +17,14 @@ const controller = new Botkit({
 controller.on('slash_command', function(bot, message) {
     switch(message.command) {
         case '/bonk':
-            console.log(bot.config);
+            console.log(bot);
             // const channelHistory = await bot.api.channels.history({token: bot.config.bot.app_token});
             // console.log(channelHistory);
-            bot.reply(message, "bonk");
+            if(global.gConfig.validChannels.includes(message.incoming_message.channelData.channel_name)) {
+                bot.reply(message, "bonk");
+            } else {
+                bot.reply(message, `Error: the historian cannot archive messages in the channel ${message.incoming_message.channelData.channel_name}`);
+            }
             break;
         case '/archive_message':
             break;
