@@ -1,0 +1,14 @@
+{
+    "development": {
+        "config_id": "development",
+        "apiBaseUrl": "http://localhost:5000"
+    },
+    "staging": {
+        "config_id": "staging",
+        "apiBaseUrl": "https://sse-web-api-staging.herokuapp.com/"
+    },
+    "production": {
+        "config_id": "production",
+        "apiBaseUrl": "https://sse-web-api-prod.herokuapp.com"
+    }
+}
