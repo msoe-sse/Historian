@@ -20,7 +20,7 @@ controller.on('slash_command', async function(bot, message) {
         case '/bonk':
             bot.reply(message, 'bonk')
             break;
-        case '/archive_message':
+        case '/archive_resource':
             if(global.gConfig.validChannels.includes(message.incoming_message.channelData.channel_name)) {
                 const channelHistory = await bot.api.channels.history({token: process.env.SLACK_API_TOKEN, 
                                                 channel: message.incoming_message.channelData.channel_id});
