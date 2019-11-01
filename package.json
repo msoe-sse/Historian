@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "lint": "eslint --ignore-path .gitignore ."
   },
   "repository": {
@@ -22,11 +22,16 @@
   "dependencies": {
     "botbuilder-adapter-slack": "^1.0.4",
     "botkit": "^4.5.0",
+    "chai-as-promised": "^7.1.1",
+    "chai-fetch-mock": "^2.0.0",
     "dotenv": "^8.1.0",
+    "fetch-mock": "^8.0.0-alpha.11",
     "lodash": "^4.17.15",
     "node-fetch": "^2.6.0"
   },
   "devDependencies": {
-    "eslint": "^6.6.0"
+    "chai": "^4.2.0",
+    "eslint": "^6.6.0",
+    "mocha": "^6.2.2"
   }
 }
