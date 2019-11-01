@@ -18,7 +18,7 @@ const controller = new Botkit({
 controller.on('slash_command', async function(bot, message) {
     switch(message.command) {
         case '/bonk':
-            bot.reply(message, 'bonk')
+            bot.reply(message, 'bonk');
             break;
         case '/archive_resource':
             if(global.gConfig.validChannels.includes(message.incoming_message.channelData.channel_name)) {
@@ -41,5 +41,5 @@ controller.on('slash_command', async function(bot, message) {
         default:
             bot.reply(message, 'unknown command');
             break;
-    };
+    }
 });
