@@ -1,7 +1,6 @@
 require('../config/config.js');
 
 function createSSEResource(author, contents) {
-    console.log(`Author: ${author}`);
     return new Promise(function(resolve, reject) {
         fetch(`${global.gConfig.apiBaseUrl}/resources/`, {
             method: 'post',
