@@ -1,13 +1,15 @@
 require('../config/config.js');
 
 function createSSEResource(author, contents) {
+    console.log(`Author: ${author}`);
     return new Promise(function(resolve, reject) {
-        fetch(`${global.gConfig.apiBaseUrl}/resources`, {
+        fetch(`${global.gConfig.apiBaseUrl}/resources/`, {
             method: 'post',
             body: JSON.stringify({
                 author: author,
                 contents: contents
-            })
+            }),
+            headers: { "Content-Type": "application/json" }
         })
         .then(res => res.json())
         .then(function(data) {
