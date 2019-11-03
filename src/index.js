@@ -32,7 +32,7 @@ controller.on('slash_command', async function(bot, message) {
                 });
     
                 try {
-                    const apiResponse = await sseWebApiClient.createSSEResource(userInfo.user.real_name, newestMessage.text);
+                    const apiResponse = await sseWebApiClient.createSSEResource(userInfo.user.real_name, newestMessage.text, newestMessage.client_msg_id);
                     bot.reply(message, apiResponse);
                 } catch(err) {
                     bot.reply(message, err);
