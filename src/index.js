@@ -24,7 +24,7 @@ controller.on('slash_command', async function(bot, message) {
             if(global.gConfig.validChannels.includes(message.incoming_message.channelData.channel_name)) {
                 const channelHistory = await bot.api.channels.history({token: process.env.SLACK_API_TOKEN, 
                                                 channel: message.incoming_message.channelData.channel_id});
-                const newestMessage = channelHistory.messages.find(x => x.subtype === undefined);
+                const newestMessage = channelHistory.messages.find(x => x.subtype === undefined && x.parent_user_id === undefined);
                     
                 const userInfo = await bot.api.users.info({
                     token: process.env.SLACK_API_TOKEN,
