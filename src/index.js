@@ -25,21 +25,23 @@ controller.on('slash_command', async function(bot, message) {
                 const channelHistory = await bot.api.channels.history({token: process.env.SLACK_API_TOKEN, 
                                                 channel: message.incoming_message.channelData.channel_id});
                 const newestMessage = channelHistory.messages.find(x => x.subtype === undefined);
-                
+                    
                 const userInfo = await bot.api.users.info({
                     token: process.env.SLACK_API_TOKEN,
                     user: newestMessage.user
                 });
-
+    
                 try {
                     const apiResponse = await sseWebApiClient.createSSEResource(userInfo.user.real_name, newestMessage.text);
                     bot.reply(message, apiResponse);
                 } catch(err) {
                     bot.reply(message, err);
                 }
-
+    
             } else {
-                bot.reply(message, `Error: the historian cannot archive messages in the channel ${message.incoming_message.channelData.channel_name}`);
+                if(message.incoming_message.channelData.channel_name !== 'directmessage') {
+                    bot.reply(message, `Error: the historian cannot archive messages in the channel ${message.incoming_message.channelData.channel_name}`);
+                }
             }
             break;
         default:
