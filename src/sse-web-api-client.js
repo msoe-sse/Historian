@@ -13,18 +13,22 @@ function createSSEResource(author, contents, messageId) {
         })
         .then(res => res.json())
         .then(function(data) {
-            let unexpectedResponse = false;
+            if(data.error === undefined) {
+                let unexpectedResponse = false;
 
-            if(data === undefined || data.author === undefined || data.author !== author)
-                unexpectedResponse = true;
-
-            if(data === undefined || data.contents === undefined || data.contents !== contents)
-                unexpectedResponse = true;
-            
-            if(unexpectedResponse)
-                reject('Error: Unexpected Response from the SSE Web API');
-            else
-                resolve('Resource Successfully Saved.');
+                if(data === undefined || data.author === undefined || data.author !== author)
+                    unexpectedResponse = true;
+    
+                if(data === undefined || data.contents === undefined || data.contents !== contents)
+                    unexpectedResponse = true;
+                
+                if(unexpectedResponse)
+                    reject('Error: Unexpected Response from the SSE Web API');
+                else
+                    resolve('Resource Successfully Saved.');
+            } else {
+                reject(`Error: ${data.error}`);
+            }
         })
         .catch(function(err) {
             reject(`Error: ${err}`);

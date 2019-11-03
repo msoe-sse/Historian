@@ -37,6 +37,12 @@ describe('SSE Web API Client', function() {
             chai.expect(sseWebApiClient.createSSEResource('Andy', 'contents', 'id')).to.be.rejectedWith('Error: My Error');
         });
 
+        it('should return the error message if the message is included in the response', function() {
+            fetchMock.post('http://localhost:5000/resources/', {'error': 'My Error'});
+
+            chai.expect(sseWebApiClient.createSSEResource('Andy', 'contents', 'id')).to.be.rejectedWith('Error: My Error');
+        });
+
         afterEach(() => fetchMock.restore());
     });
 });
