@@ -1,4 +1,5 @@
 require('../config/config.js');
+require('dotenv').config();
 
 function createSSEResource(author, contents, messageId) {
     return new Promise(function(resolve, reject) {
@@ -9,7 +10,10 @@ function createSSEResource(author, contents, messageId) {
                 contents: contents,
                 messageId: messageId
             }),
-            headers: { "Content-Type": "application/json" }
+            headers: { 
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${process.env.SSE_API_KEY}`
+            }
         })
         .then(res => res.json())
         .then(function(data) {
